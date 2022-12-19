@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="./assets/logo.png" />
     <h1>{{ msg }}</h1>
-    <button @click="login" type="button" v-if="!user">Login with Microsoft</button>
+    <button @click="login" type="button" v-if="!user">
+      Login with Microsoft
+    </button>
     <button @click="callAPI" type="button" v-if="user">
       Call Graph's /me API
     </button>
@@ -17,19 +19,19 @@
 </template>
 
 <script>
-import AuthService from './services/auth.service';
-import GraphService from './services/graph.service';
+import AuthService from "./services/auth.service";
+import GraphService from "./services/graph.service";
 
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
-      msg: 'Welcome to Your Vue.js + MSAL.js App',
+      msg: "Welcome to Your Vue.js + MSAL.js App",
       user: null,
       userInfo: null,
       apiCallFailed: false,
       loginFailed: false
-    }
+    };
   },
   created() {
     this.authService = new AuthService();
@@ -43,6 +45,7 @@ export default {
           this.graphService.getUserInfo(token).then(
             data => {
               this.userInfo = data;
+              console.log(data);
             },
             error => {
               console.error(error);
@@ -77,13 +80,12 @@ export default {
       );
     }
   }
-
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
